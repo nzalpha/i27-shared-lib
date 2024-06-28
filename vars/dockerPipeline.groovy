@@ -28,14 +28,14 @@ environment {
             }
         }
 
-        // stage('Build'){
-        //     steps{
-        //         script{
-        //         echo "-----------Build Method ------------"
-        //         d.buildApp("${env.APPLICATION_NAME}")
-        //         }
-        //     }
-        // }
+        stage('Build'){
+            steps{
+                script{
+                echo "-----------Build Method ------------"
+                d.buildApp("${env.APPLICATION_NAME}")
+                }
+            }
+        }
     }
 }
 }
