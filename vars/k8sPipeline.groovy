@@ -25,7 +25,9 @@ environment {
         {
             steps{
                 echo "------------Auth Method---------"
+                script{
                 d.auth_login()
+                }
             }
         }
 
