@@ -9,7 +9,7 @@ pipeline {
         label 'K8-slave'
     }
     tools {
-        // maven 'mvn 3.8'
+        maven 'mvn 3.8'
         jdk 'jdk-17'
     }
 
@@ -28,14 +28,14 @@ environment {
             }
         }
 
-        stage('Build'){
-            steps{
-                script{
-                echo "-----------Build Method ------------"
-                d.buildApp("${env.APPLICATION_NAME}")
-                }
-            }
-        }
+        // stage('Build'){
+        //     steps{
+        //         script{
+        //         echo "-----------Build Method ------------"
+        //         d.buildApp("${env.APPLICATION_NAME}")
+        //         }
+        //     }
+        // }
     }
 }
 }
