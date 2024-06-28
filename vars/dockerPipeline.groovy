@@ -2,7 +2,7 @@ import com.i27academy.builds.Docker
 
 def call(Map pipelineParams){
     Docker d = new Docker(this)
-}
+
 
 pipeline {
    agent {
@@ -14,8 +14,7 @@ pipeline {
     }
 
 environment {
-        APPLICATION_NAME = {pipelineParams.appName}
-
+        APPLICATION_NAME = "${pipelineParams.appName}"
     }
 
     stages{
@@ -37,4 +36,5 @@ environment {
             }
         }
     }
+}
 }
