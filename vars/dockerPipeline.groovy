@@ -28,5 +28,13 @@ environment {
                 }
             }
         }
+
+        stage('Build'){
+            steps{
+                echo "-----------Build Method ------------"
+                d.buildApp("${env.APPLICATION_NAME}")
+               
+            }
+        }
     }
 }

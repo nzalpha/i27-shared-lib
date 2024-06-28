@@ -12,6 +12,15 @@ class Docker{
 
     //Application Build
 
+    def buildApp(appName){
+        jenkins.sh """
+         echo "Building the  Application $appName for shared library"
+         sh 'mvn clean package -DskipTests=true'
+         archiveArtifacts artifacts: 'target/*.jar'
+         """
+    }
+}
+
     //Docker Build
 
 
