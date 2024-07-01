@@ -70,9 +70,9 @@ class Docker{
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker stop $appName-$envDeploy
         // Remove the Container
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker rm $appName-$envDeploy
-        } catch (Exception e) {
-                        // Code to handle the exception
-                        echo "Caught an exception during build: ${e.message}" }
+        } catch(err) {
+                    echo "Error Caught:"
+                }
         // Create the container
         echo "Creating the Container"
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker run -d -p $DevHostPort:$DevContPort --name $appName-$envDeploy $dockerHub/$appName:$gitCommit
