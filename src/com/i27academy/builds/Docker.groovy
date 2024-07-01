@@ -16,10 +16,17 @@ class Docker{
 
     def imageValidation(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
             
-            buildApp(appName)
-            
-            
+        try{
+            sh "docker pull $dockerHub/$appName:$gitCommit"
         }
+        catch(Exception e){
+            println ("Docker image with this tag doesnt exist, so creating the image")
+            buildApp(appName)
+            dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit)
+        }
+    }
+            
+            
        
     
 
