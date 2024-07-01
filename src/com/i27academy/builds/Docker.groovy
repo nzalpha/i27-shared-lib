@@ -6,18 +6,65 @@ class Docker{
         this.jenkins=jenkins
     }
 
-    def add(fnum,snum){
-        return fnum+snum
-    }
-
-    //Application Build
-
     def buildApp(appName){
         jenkins.sh """
          echo "Building the  Application $appName for shared library"
          mvn clean package -DskipTests=true
+         archiveArtifacts artifacts: 'target/*.jar'
          """
     }
+
+    // def imageValidation(){
+    
+    //     println ("Pulling the docker image")
+    //     try{
+    //         sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+    //     }
+    //     catch(Exception e){
+    //         println ("Docker image with this tag doesnt exist, so creating the image")
+    //         buildApp().call()
+    //         dockerBuildAndPush().call()
+    //     }
+    // }
+
+    //     def dockerBuildAndPush(){
+    //     jenkins.sh """
+    //     cp ${WORKSPACE}/target/i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} ./.cicd/
+    //     echo "------------Building Docker Image--------"
+    //     docker build --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd/"
+    //     echo "Build Done"
+    //     echo "-----------Docker Login--------------"
+    //     docker login -u ${env.DOCKER_CREDS_USR} -p ${env.DOCKER_CREDS_PSW}"
+    //     echo "-------------Docker Push-----------"
+    //     docker push ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+    //     """
+    // }
+
+
+//     def dockerDeploy(envDeploy,hostPort, containerPort){
+//     return{
+//          echo ("-----------Deploying to ${envDeploy} Env---------")
+//                 withCredentials([usernamePassword(credentialsId: 'ali_docker_vm_cred', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+//                     script{
+//                          sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+                    
+//                     try{
+//                         //Stop the container
+//                       sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker stop  ${env.APPLICATION_NAME}-${envDeploy}"
+//                         // Remove the container
+//                       sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker rm  ${env.APPLICATION_NAME}-${envDeploy}"   
+//                     }  catch(err)
+//                     {
+//                         echo "Error Caught: $err"
+                       
+//                     }
+//                      echo " Creating Container"
+//                        sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker run -d -p ${hostPort}:${containerPort} --name ${env.APPLICATION_NAME}-${envDeploy} ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+//                     }
+//                 }
+//     }
+// }
+
 }
 
     //Docker Build
