@@ -52,9 +52,7 @@ parameters {
             }
         }
 
-
-        stage("Docker build and Push")
-        {
+        stage("Docker build and Push"){
             when{
                 anyOf{
                     expression{
@@ -70,6 +68,22 @@ parameters {
                 
             }
         }
+
+        stage("Deploy to Dev"){
+            when{
+                anyOf{
+                    expression{
+                        params.DeploytoDev == 'yes'
+                    }
+                }
+            }
+            steps{
+                script{
+                d.imageValidation("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}","${env.DOCKER_CREDS_PSW}","${GIT_COMMIT}")  
+                }
+            }
+        }
+
 }
 }
 }

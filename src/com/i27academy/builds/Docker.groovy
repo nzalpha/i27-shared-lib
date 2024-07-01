@@ -14,18 +14,18 @@ class Docker{
          """
     }
 
-    // def imageValidation(){
+    def imageValidation(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
     
-    //     println ("Pulling the docker image")
-    //     try{
-    //         sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
-    //     }
-    //     catch(Exception e){
-    //         println ("Docker image with this tag doesnt exist, so creating the image")
-    //         buildApp().call()
-    //         dockerBuildAndPush().call()
-    //     }
-    // }
+        println ("Pulling the docker image")
+        try{
+            sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+        }
+        catch(Exception e){
+            println ("Docker image with this tag doesnt exist, so creating the image")
+            buildApp(appName)
+            
+        }
+    }
 
         def dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
         jenkins.sh """
