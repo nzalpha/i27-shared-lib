@@ -14,18 +14,20 @@ class Docker{
          """
     }
 
-    def imageValidation(workSpace,appNamee,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
-        
+    def imageValidation(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
+        jenkins.sh """
+        echo "--------------Inisde Docker Groovy imageValidation---------"
         println ("Pulling the docker image")
         try{
-            sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+            //sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
         }
         catch(Exception e){
-          
+            echo "--------------Inisde Docker Groovy imageValidation Exception---------"
             println ("Docker image with this tag doesnt exist, so creating the image")
-            buildApp($appNamee)
+            buildApp($appName)
             
         }
+        """
     }
 
         def dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
