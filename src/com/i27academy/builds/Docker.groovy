@@ -15,9 +15,9 @@ class Docker{
     }
 
     def imageValidation(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
-            jenkins.sh """
+            
             buildApp(appName)
-            """
+            
             
         }
        
