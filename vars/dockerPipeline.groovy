@@ -65,7 +65,7 @@ parameters {
             steps{
                 script{
                     echo "-----------Docker build and push Method ------------"
-                    d.dockerBuildAndPush("${WORKSPACE}")
+                    d.dockerBuildAndPush("${WORKSPACE}","${env.APPLICATION_NAME}")
                 }
                 
             }

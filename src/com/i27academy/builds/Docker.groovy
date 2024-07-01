@@ -27,7 +27,7 @@ class Docker{
     //     }
     // }
 
-        def dockerBuildAndPush(workSpace){
+        def dockerBuildAndPush(workSpace,appName){
         jenkins.sh """
         echo "--------------Inisde Docker Groovy buildandpush---------"
         echo "workspace is $workSpace"
