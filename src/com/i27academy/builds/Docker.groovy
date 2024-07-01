@@ -8,9 +8,9 @@ class Docker{
 
     def buildApp(appName){
         jenkins.sh """
+         echo "${WORKSPACE}"
          echo "Building the  Application $appName for shared library"
          mvn clean package -DskipTests=true
-         archiveArtifacts artifacts: 'target/*.jar'
          """
     }
 

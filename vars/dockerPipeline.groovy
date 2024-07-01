@@ -50,22 +50,22 @@ parameters {
         }
 
 
-        // stage("Docker build and Push")
-        // {
-        //     when{
-        //         anyOf{
-        //             expression{
-        //                 params.DockerPushOnly == 'yes'
-        //             }
-        //         }
-        //     }
-        //     steps{
-        //         script{
-        //             d.dockerBuildAndPush("${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}")
-        //         }
+        stage("Docker build and Push")
+        {
+            when{
+                anyOf{
+                    expression{
+                        params.DockerPushOnly == 'yes'
+                    }
+                }
+            }
+            steps{
+                script{
+                    d.dockerBuildAndPush("${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}")
+                }
                 
-        //     }
-        // }
+            }
+        }
 }
 }
 }
