@@ -44,7 +44,9 @@ parameters {
             steps{
                 script{
                 echo "-----------Build Method ------------"
+                echo "${WORKSPACE}"
                 d.buildApp("${env.APPLICATION_NAME}")
+
                 }
             }
         }
