@@ -40,12 +40,12 @@ class Docker{
         echo " commit is $gitCommit"
         cp $workSpace/target/i27-$appName-$pomVersion.$pomPackaging ./.cicd/
         echo "------------Building Docker Image--------"
-        docker build --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd/"
+        docker build --build-arg JAR_SOURCE=i27-$appName-$pomVersion.$pomPackaging -t $dockerHub/$appName:$gitCommit ./.cicd/"
         echo "Build Done"
         echo "-----------Docker Login--------------"
-        docker login -u ${env.DOCKER_CREDS_USR} -p ${env.DOCKER_CREDS_PSW}"
+        docker login -u $dockerUsr -p $dockerPsw"
         echo "-------------Docker Push-----------"
-        docker push ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+        docker push $dockerHub/$appName:$gitCommit"
         """
     }
 
