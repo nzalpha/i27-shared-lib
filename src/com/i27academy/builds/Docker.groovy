@@ -27,10 +27,17 @@ class Docker{
     //     }
     // }
 
-        def dockerBuildAndPush(workSpace){
+        def dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
         jenkins.sh """
         echo "--------------Inisde Docker Groovy buildandpush---------"
         echo "workspace is $workSpace"
+        echo " appname is $appName"
+        echo "pomVersion is $pomVersion"
+        echo "packaging is $pomPackaging"
+        echo "docker hub is $dockerHub"
+        echo "docker usr is $dockerUsr"
+        echo " psw is $dockerPsw"
+        echo " commit is $gitCommit"
         """
     }
 
