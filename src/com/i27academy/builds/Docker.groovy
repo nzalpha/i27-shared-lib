@@ -8,7 +8,7 @@ class Docker{
 
     def buildApp(appName){
         jenkins.sh """
-         echo "${WORKSPACE}"
+       
          echo "Building the  Application $appName for shared library"
          mvn clean package -DskipTests=true
          """
@@ -27,18 +27,21 @@ class Docker{
     //     }
     // }
 
-    //     def dockerBuildAndPush(){
-    //     jenkins.sh """
-    //     cp ${WORKSPACE}/target/i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} ./.cicd/
-    //     echo "------------Building Docker Image--------"
-    //     docker build --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd/"
-    //     echo "Build Done"
-    //     echo "-----------Docker Login--------------"
-    //     docker login -u ${env.DOCKER_CREDS_USR} -p ${env.DOCKER_CREDS_PSW}"
-    //     echo "-------------Docker Push-----------"
-    //     docker push ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
-    //     """
-    // }
+        def dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging,){
+        jenkins.sh """
+        echo "--------------Inisde Docker Groovy buildandpush---------"
+        echo "workspace is $workSpace"
+        ls $workSpace/target/i27-$appName-$pomVersion.$pomPackaging
+        cp $workSpace/target/i27-$appName-$pomVersion.$pomPackaging ./.cicd/
+        // echo "------------Building Docker Image--------"
+        // docker build --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd/"
+        // echo "Build Done"
+        // echo "-----------Docker Login--------------"
+        // docker login -u ${env.DOCKER_CREDS_USR} -p ${env.DOCKER_CREDS_PSW}"
+        // echo "-------------Docker Push-----------"
+        // docker push ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+        """
+    }
 
 
 //     def dockerDeploy(envDeploy,hostPort, containerPort){

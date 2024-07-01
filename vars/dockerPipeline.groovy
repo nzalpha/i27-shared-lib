@@ -19,6 +19,7 @@ environment {
         POM_PACKAGING = readMavenPom().getPackaging()
         DOCKER_HUB= "docker.io/nawaz004"
         DOCKER_CREDS= credentials('docker_cred')
+
     }
 
 parameters {
@@ -52,22 +53,23 @@ parameters {
         }
 
 
-        // stage("Docker build and Push")
-        // {
-        //     when{
-        //         anyOf{
-        //             expression{
-        //                 params.DockerPushOnly == 'yes'
-        //             }
-        //         }
-        //     }
-        //     steps{
-        //         script{
-        //             d.dockerBuildAndPush("${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}")
-        //         }
+        stage("Docker build and Push")
+        {
+            when{
+                anyOf{
+                    expression{
+                        params.DockerPushOnly == 'yes'
+                    }
+                }
+            }
+            steps{
+                script{
+                    echo "-----------Docker build and push Method ------------"
+                    d.dockerBuildAndPush("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}")
+                }
                 
-        //     }
-        // }
+            }
+        }
 }
 }
 }
