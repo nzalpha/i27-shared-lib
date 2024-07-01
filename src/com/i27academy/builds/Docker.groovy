@@ -53,7 +53,7 @@ class Docker{
     }
 
 
-    def dockerDeploy(dockerServerIp,appName,DevHostPort,DevContPort,dockerHub,gitCommit,VMCredUsr,VMCredPsw){
+    def dockerDeploy(dockerServerIp,appName,DevHostPort,DevContPort,dockerHub,gitCommit,VMCredUsr,VMCredPsw,envDeploy){
 
         jenkins.sh """
         echo "--------------Inisde Docker Groovy DockerDeploy---------"
@@ -63,10 +63,18 @@ class Docker{
         echo "dockerHub is $dockerHub"
         echo "VMCredUsr is $VMCredUsr"
         echo "VMCredPsw usr is $VMCredPsw"
-      
-        echo "inside the script"
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker pull $dockerHub/$appName:$gitCommit
-
+        try {
+        // Stop the container
+        sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker stop $appName-$envDeploy
+        // Remove the Container
+        sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker rm $appName-$envDeploy
+        } catch(err) {
+            echo "Error Caught: $err"
+            }
+        // Create the container
+        echo "Creating the Container"
+        sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker run -d -p $DevHostPort:$DevContPort --name $appName-$envDeploy $dockerHub/$appName:$gitCommit
         """
 }
 
