@@ -64,6 +64,7 @@ class Docker{
         echo "VMCredUsr is $VMCredUsr"
         echo "VMCredPsw usr is $VMCredPsw"
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker pull $dockerHub/$appName:$gitCommit
+        script{
         try {
         // Stop the container
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker stop $appName-$envDeploy
@@ -71,11 +72,12 @@ class Docker{
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker rm $appName-$envDeploy
         } catch (Exception e) {
                         // Code to handle the exception
-                        echo "Caught an exception during build: ${e.message}"
+                        echo "Caught an exception during build: ${e.message}" }
         // Create the container
         echo "Creating the Container"
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker run -d -p $DevHostPort:$DevContPort --name $appName-$envDeploy $dockerHub/$appName:$gitCommit
-        """
+        }"""
+    
 }
 
 }
