@@ -79,6 +79,7 @@ parameters {
             }
             steps{
                 script{
+                    echo "-----------Docker Deploy ------------"
                 d.imageValidation("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}","${env.DOCKER_CREDS_PSW}","${GIT_COMMIT}")  
                 }
             }
