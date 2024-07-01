@@ -53,29 +53,18 @@ class Docker{
     }
 
 
-//     def dockerDeploy(envDeploy,hostPort, containerPort){
-//     return{
-//          echo ("-----------Deploying to ${envDeploy} Env---------")
-//                 withCredentials([usernamePassword(credentialsId: 'ali_docker_vm_cred', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-//                     script{
-//                          sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
-                    
-//                     try{
-//                         //Stop the container
-//                       sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker stop  ${env.APPLICATION_NAME}-${envDeploy}"
-//                         // Remove the container
-//                       sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker rm  ${env.APPLICATION_NAME}-${envDeploy}"   
-//                     }  catch(err)
-//                     {
-//                         echo "Error Caught: $err"
-                       
-//                     }
-//                      echo " Creating Container"
-//                        sh "sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${docker_server_ip} docker run -d -p ${hostPort}:${containerPort} --name ${env.APPLICATION_NAME}-${envDeploy} ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
-//                     }
-//                 }
-//     }
-// }
+    def dockerDeploy(dockerServerIp,appName,DevHostPort,DevContPort,dockerHub,gitCommit,VMCredUsr,VMCredPsw){
+
+        jenkins.sh """
+        echo "--------------Inisde Docker Groovy DockerDeploy---------"
+        echo "dockerServerIp is $dockerServerIp"
+        echo " DevHostPort is $DevHostPort"
+        echo "DevContPort is $DevContPort"
+        echo "dockerHub is $dockerHub"
+        echo "VMCredUsr is $VMCredUsr"
+        echo "VMCredPsw usr is $VMCredPsw"
+        """
+}
 
 }
 
