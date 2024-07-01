@@ -27,12 +27,13 @@ class Docker{
     //     }
     // }
 
-        def dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging){
+        def dockerBuildAndPush(workSpace){
         jenkins.sh """
         echo "--------------Inisde Docker Groovy buildandpush---------"
         echo "workspace is $workSpace"
-        ls $workSpace/target/i27-$appName-$pomVersion.$pomPackaging
-        cp $workSpace/target/i27-$appName-$pomVersion.$pomPackaging ./.cicd/
+        //,appName,pomVersion,pomPackaging
+        // ls $workSpace/target/i27-$appName-$pomVersion.$pomPackaging
+        // cp $workSpace/target/i27-$appName-$pomVersion.$pomPackaging ./.cicd/
         // echo "------------Building Docker Image--------"
         // docker build --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd/"
         // echo "Build Done"
