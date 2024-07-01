@@ -64,7 +64,17 @@ class Docker{
         echo "VMCredUsr is $VMCredUsr"
         echo "VMCredPsw usr is $VMCredPsw"
         sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker pull $dockerHub/$appName:$gitCommit
-       
+        try {
+        // Stop the container
+        sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker stop $appName-$envDeploy
+        // Remove the Container
+        sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker rm $appName-$envDeploy
+        } catch(err) {
+            echo "Error Caught: $err"
+            }
+        // Create the container
+        echo "Creating the Container"
+        sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker run -d -p $DevHostPort:$DevContPort --name $appName-$envDeploy $dockerHub/$appName:$gitCommit
         """
 }
 
