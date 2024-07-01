@@ -65,7 +65,7 @@ parameters {
             steps{
                 script{
                     echo "-----------Docker build and push Method ------------"
-                    d.dockerBuildAndPush("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}")
+                    d.dockerBuildAndPush("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}")
                 }
                 
             }
@@ -73,3 +73,5 @@ parameters {
 }
 }
 }
+
+// ,"${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}"
