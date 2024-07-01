@@ -19,7 +19,7 @@ class Docker{
         echo "--------------Inisde Docker Groovy imageValidation---------"
         println ("Pulling the docker image")
         try{
-            //sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+           println ("testing")
         }
         catch(Exception e){
             echo "--------------Inisde Docker Groovy imageValidation Exception---------"
