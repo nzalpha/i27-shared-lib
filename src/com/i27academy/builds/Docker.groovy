@@ -15,20 +15,12 @@ class Docker{
     }
 
     def imageValidation(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
-        jenkins.sh """
-        echo "--------------Inisde Docker Groovy imageValidation---------"
-        println ("Pulling the docker image")
-        try{
-           println ("testing")
-        }
-        catch(Exception e){
-            echo "--------------Inisde Docker Groovy imageValidation Exception---------"
-            println ("Docker image with this tag doesnt exist, so creating the image")
+        
             buildApp($appName)
             
         }
-        """
-    }
+       
+    
 
         def dockerBuildAndPush(workSpace,appName,pomVersion,pomPackaging,dockerHub,dockerUsr,dockerPsw,gitCommit){
         jenkins.sh """
