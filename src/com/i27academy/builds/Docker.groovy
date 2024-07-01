@@ -63,6 +63,10 @@ class Docker{
         echo "dockerHub is $dockerHub"
         echo "VMCredUsr is $VMCredUsr"
         echo "VMCredPsw usr is $VMCredPsw"
+        script{
+                 sshpass -p $VMCredPsw ssh -o StrictHostKeyChecking=no $VMCredUsr@$dockerServerIp docker pull $dockerHub/$appName:$gitCommit  
+               }
+
         """
 }
 
