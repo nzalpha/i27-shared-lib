@@ -100,7 +100,7 @@ parameters {
             when{
                 anyOf{
                     expression{
-                        params.DeploytoDev == 'yes'
+                        params.DeploytoTest == 'yes'
                     }
                 }
             }
