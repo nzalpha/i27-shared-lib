@@ -89,7 +89,7 @@ parameters {
             steps{
                 script{
                     echo "-----------Docker Deploy ------------"
-               // d.imageValidation("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}","${env.DOCKER_CREDS_PSW}","${GIT_COMMIT}")  
+               d.imageValidation("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}","${env.DOCKER_CREDS_PSW}","${GIT_COMMIT}")  
                 d.dockerDeploy("${docker_server_ip}","${env.APPLICATION_NAME}","${env.Dev_HOST_PORT}","${env.Dev_CONT_PORT}","${env.DOCKER_HUB}","${GIT_COMMIT}","${env.VM_CREDS_USR}","${env.VM_CREDS_PSW}","${ENV_DEPLOY}")
                 }
             }
@@ -107,7 +107,7 @@ parameters {
             steps{
                 script{
                     echo "-----------Docker Deploy ------------"
-               // d.imageValidation("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}","${env.DOCKER_CREDS_PSW}","${GIT_COMMIT}")  
+               d.imageValidation("${WORKSPACE}","${env.APPLICATION_NAME}","${env.POM_VERSION}","${env.POM_PACKAGING}","${env.DOCKER_HUB}","${env.DOCKER_CREDS_USR}","${env.DOCKER_CREDS_PSW}","${GIT_COMMIT}")  
                 d.dockerDeploy("${docker_server_ip}","${env.APPLICATION_NAME}","${env.Test_HOST_PORT}","${env.Test_CONT_PORT}","${env.DOCKER_HUB}","${GIT_COMMIT}","${env.VM_CREDS_USR}","${env.VM_CREDS_PSW}","${env.Test_ENV_DEPLOY}")
                 }
             }
