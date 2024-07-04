@@ -1,6 +1,6 @@
 // this is for k8 deployment
 
-import com.i27academy.k8s.k8s
+import com.i27academy.K8.k8s
 import com.i27academy.builds.Docker
 def call(Map pipelineParams){
     k8s d = new k8s(this)

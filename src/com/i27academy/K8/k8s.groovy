@@ -1,4 +1,4 @@
-package com.i27academy.k8s
+package com.i27academy.K8
 
 class k8s{
     def jenkins
