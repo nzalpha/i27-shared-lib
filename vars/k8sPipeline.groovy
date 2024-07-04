@@ -1,9 +1,9 @@
 // this is for k8 deployment
 
-import com.i27academy.K8.k8s
+import com.i27academy.k8s.K8s
 import com.i27academy.builds.Docker
 def call(Map pipelineParams){
-    k8s d = new k8s(this)
+    K8s d = new K8s(this)
 
 
 pipeline {
@@ -31,24 +31,6 @@ environment {
             }
         }
 
-        stage ('Add') {
-            // This step will take care of building the application
-            steps {
-                echo "--------Add Method-------"
-                script{
-                    println d.add(5,6)
-                }
-            }
-        }
-
-        stage('Build'){
-            steps{
-                script{
-                echo "-----------Build Method ------------"
-                d.buildApp("${env.APPLICATION_NAME}")
-                }
-            }
-        }
     }
 }
 }
