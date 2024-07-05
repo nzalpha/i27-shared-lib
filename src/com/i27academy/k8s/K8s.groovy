@@ -11,7 +11,7 @@ class K8s{
       def auth_login(appName){
         jenkins.sh """
          echo "Entering into K8 authentication"
-         
+         gcloud container clusters get-credentials cart-dev-ns --zone us-central1-c --project boutique-424803
          gcloud compute instances list
          """
     }
