@@ -17,6 +17,10 @@ pipeline {
 
 environment {
         APPLICATION_NAME = "${pipelineParams.appName}"
+        GKE_DEV_CLUSTER_NAME = "cart-dev-ns"
+        GKE_DEV_ZONE = "us-central1-c"
+        GKE_DEV_PROJECT = "boutique-424803"
+
     }
 
     stages{
@@ -26,7 +30,7 @@ environment {
             steps{
                 echo "------------Auth Method---------"
                 script{
-                d.auth_login()
+                d.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
                 }
             }
         }

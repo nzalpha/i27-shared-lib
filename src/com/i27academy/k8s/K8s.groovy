@@ -8,10 +8,10 @@ class K8s{
 
     // Method to authenticate to cluster
 
-      def auth_login(appName){
+      def auth_login(gke_cluster_name,gke_zone,gke_project){
         jenkins.sh """
          echo "Entering into K8 authentication"
-         gcloud container clusters get-credentials cart-dev-ns --zone us-central1-c --project boutique-424803
+         gcloud container clusters get-credentials $gke_cluster_name --zone $gke_zone --project $gke_project
          gcloud compute instances list
          echo "-----------------Get nodes in the cluster-------------------"
          kubectl get nodes
