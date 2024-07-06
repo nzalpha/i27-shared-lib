@@ -20,6 +20,8 @@ environment {
         GKE_DEV_CLUSTER_NAME = "cart-dev-ns"
         GKE_DEV_ZONE = "us-central1-c"
         GKE_DEV_PROJECT = "boutique-424803"
+        K8S_DEV_FILE = "k8s_dev.yaml"
+        DEV_NAMESPACE = "carting-dev-ns"
 
     }
 
@@ -31,6 +33,24 @@ environment {
                 echo "------------Auth Method---------"
                 script{
                 d.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                }
+            }
+        }
+
+        stage("Deploy to Dev")
+        {
+            when{
+                anyOf{
+                    expression{
+                        params.DeploytoDev == 'yes'
+                    }
+                }
+            }
+            steps{
+                script{
+                imageValidation().call()    
+                d.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                d.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}")
                 }
             }
         }
