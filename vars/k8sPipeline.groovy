@@ -39,14 +39,9 @@ environment {
 
         stage("Deploy to Dev")
         {
-            when{
-                anyOf{
-                    expression{
-                        params.DeploytoDev == 'yes'
-                    }
-                }
-            }
+         
             steps{
+                echo "------------Deploy to Prod Method---------"
                 script{
                 imageValidation().call()    
                 d.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
