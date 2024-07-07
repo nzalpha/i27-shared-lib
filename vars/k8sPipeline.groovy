@@ -22,6 +22,8 @@ environment {
         GKE_DEV_PROJECT = "boutique-424803"
         K8S_DEV_FILE = "k8s_dev.yaml"
         DEV_NAMESPACE = "carting-dev-ns"
+        DOCKER_HUB= "docker.io/nawaz004"
+        DOCKER_CREDS= credentials('docker_cred')
 
     }
 
@@ -43,8 +45,9 @@ environment {
             steps{
                 echo "------------Deploy to Prod Method---------"
                 script{  
+                def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}""
                 d.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                d.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}")
+                d.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}",docker_image)
                 }
             }
         }
