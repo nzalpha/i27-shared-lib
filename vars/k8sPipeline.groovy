@@ -45,7 +45,7 @@ environment {
             steps{
                 echo "------------Deploy to Prod Method---------"
                 script{  
-                def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}""
+                def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                 d.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
                 d.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}",docker_image)
                 }
